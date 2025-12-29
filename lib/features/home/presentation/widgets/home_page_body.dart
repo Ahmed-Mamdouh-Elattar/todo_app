@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/config/app_text_styles.dart';
+import 'package:todo_app/core/utils/app_navigation.dart';
 import 'package:todo_app/core/widgets/custom_button.dart';
+import 'package:todo_app/features/home/presentation/pages/add_new_task_page.dart';
 import 'package:todo_app/features/home/presentation/widgets/task_Item.dart';
 import 'package:todo_app/features/home/presentation/widgets/task_container_list.dart';
+import 'package:animations/animations.dart';
 
 class HomePageBody extends StatelessWidget {
   const HomePageBody({super.key});
@@ -74,7 +77,16 @@ class HomePageBody extends StatelessWidget {
             bottom: 20,
             right: 0,
             left: 0,
-            child: CustomButton(text: "Add New Task", onPressed: () {}),
+            child: CustomButton(
+              text: "Add New Task",
+              onPressed: () {
+                AppNavigation.pushSharedAxis(
+                  context,
+                  const AddNewTaskPage(),
+                  type: SharedAxisTransitionType.vertical,
+                );
+              },
+            ),
           ),
         ],
       ),
