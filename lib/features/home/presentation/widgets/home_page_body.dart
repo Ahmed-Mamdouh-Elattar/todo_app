@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/config/app_text_styles.dart';
+import 'package:todo_app/core/helper/constants.dart';
 import 'package:todo_app/core/utils/app_navigation.dart';
 import 'package:todo_app/core/widgets/custom_button.dart';
 import 'package:todo_app/features/home/presentation/pages/add_new_task_page.dart';
@@ -18,7 +19,7 @@ class HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: kPadding),
       child: Stack(
         children: [
           CustomScrollView(
