@@ -84,7 +84,9 @@ class AppNavigation {
 
   // ================= 5. Utility =================
   static void pop(BuildContext context) {
-    if (Navigator.canPop(context)) Navigator.pop(context);
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
   }
 
   // ---------------- Helper Methods ----------------
