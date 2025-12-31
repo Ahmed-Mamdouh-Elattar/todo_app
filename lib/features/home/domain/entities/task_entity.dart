@@ -1,0 +1,33 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:todo_app/core/enums/task_category.dart' show TaskCategory;
+import 'package:todo_app/features/home/data/models/task_model.dart';
+
+class TaskEntity {
+  int id;
+  String title;
+  TaskCategory? category;
+  String? date;
+  String? time;
+  String? notes;
+  bool? isCompleted;
+  TaskEntity({
+    required this.title,
+    this.id = 0,
+    this.category,
+    this.date,
+    this.time,
+    this.notes,
+    this.isCompleted,
+  });
+  TaskModel toTaskModel() {
+    return TaskModel(
+      id: id,
+      title: title,
+      category: category?.name,
+      date: date,
+      time: time,
+      notes: notes,
+      isCompleted: isCompleted,
+    );
+  }
+}
