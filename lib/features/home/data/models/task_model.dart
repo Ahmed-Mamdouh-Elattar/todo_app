@@ -9,19 +9,19 @@ class TaskModel {
   @Id()
   int id;
   String title;
-  String? category;
-  String? date;
-  String? time;
+  String category;
+  String date;
+  String time;
   String? notes;
-  bool? isCompleted;
+  bool isCompleted;
   TaskModel({
     required this.title,
+    required this.category,
+    required this.date,
+    required this.time,
+    required this.isCompleted,
     this.id = 0,
-    this.category,
-    this.date,
-    this.time,
     this.notes,
-    this.isCompleted,
   });
 
   @override
@@ -54,7 +54,7 @@ class TaskModel {
     return TaskEntity(
       id: id,
       title: title,
-      category: category != null ? TodoCategory.values.byName(category!) : null,
+      category: TodoCategory.values.byName(category),
       date: date,
       time: time,
       notes: notes,

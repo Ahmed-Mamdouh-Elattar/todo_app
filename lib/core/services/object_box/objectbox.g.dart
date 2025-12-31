@@ -140,15 +140,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
       },
       objectToFB: (TaskModel object, fb.Builder fbb) {
         final titleOffset = fbb.writeString(object.title);
-        final categoryOffset = object.category == null
-            ? null
-            : fbb.writeString(object.category!);
-        final dateOffset = object.date == null
-            ? null
-            : fbb.writeString(object.date!);
-        final timeOffset = object.time == null
-            ? null
-            : fbb.writeString(object.time!);
+        final categoryOffset = fbb.writeString(object.category);
+        final dateOffset = fbb.writeString(object.date);
+        final timeOffset = fbb.writeString(object.time);
         final notesOffset = object.notes == null
             ? null
             : fbb.writeString(object.notes!);
@@ -169,37 +163,38 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final titleParam = const fb.StringReader(
           asciiOptimization: true,
         ).vTableGet(buffer, rootOffset, 6, '');
+        final categoryParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 8, '');
+        final dateParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 10, '');
+        final timeParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 12, '');
+        final isCompletedParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          16,
+          false,
+        );
         final idParam = const fb.Int64Reader().vTableGet(
           buffer,
           rootOffset,
           4,
           0,
         );
-        final categoryParam = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGetNullable(buffer, rootOffset, 8);
-        final dateParam = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGetNullable(buffer, rootOffset, 10);
-        final timeParam = const fb.StringReader(
-          asciiOptimization: true,
-        ).vTableGetNullable(buffer, rootOffset, 12);
         final notesParam = const fb.StringReader(
           asciiOptimization: true,
         ).vTableGetNullable(buffer, rootOffset, 14);
-        final isCompletedParam = const fb.BoolReader().vTableGetNullable(
-          buffer,
-          rootOffset,
-          16,
-        );
         final object = TaskModel(
           title: titleParam,
-          id: idParam,
           category: categoryParam,
           date: dateParam,
           time: timeParam,
-          notes: notesParam,
           isCompleted: isCompletedParam,
+          id: idParam,
+          notes: notesParam,
         );
 
         return object;
