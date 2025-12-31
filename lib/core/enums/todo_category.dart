@@ -8,7 +8,7 @@ enum TodoCategory {
   health(color: Colors.red, icon: Icons.local_hospital),
   finance(color: Colors.teal, icon: Icons.account_balance_wallet),
   education(color: Colors.indigo, icon: Icons.school),
-  travel(color: Colors.pink, icon: Icons.flight_takeoff),
+  travel(color: Colors.pink, icon: Icons.flight),
   social(color: Colors.cyan, icon: Icons.people),
   others(color: Colors.grey, icon: Icons.calendar_month);
 
