@@ -6,7 +6,8 @@ import 'package:todo_app/core/enums/todo_category.dart';
 import 'package:todo_app/features/home/presentation/widgets/category_icon.dart';
 
 class TaskCategory extends HookWidget {
-  const TaskCategory({super.key});
+  const TaskCategory({required this.categoryController, super.key});
+  final ValueNotifier<TodoCategory?> categoryController;
   @override
   Widget build(BuildContext context) {
     final selectedCategory = useState<TodoCategory?>(null);
@@ -27,6 +28,7 @@ class TaskCategory extends HookWidget {
                 return GestureDetector(
                   onTap: () {
                     selectedCategory.value = category;
+                    categoryController.value = category;
                   },
                   child: CategoryIcon(
                     color: category.color,

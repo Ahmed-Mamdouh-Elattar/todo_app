@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:todo_app/core/config/app_color.dart';
+import 'package:todo_app/core/enums/todo_category.dart';
 import 'package:todo_app/core/helper/constants.dart';
 import 'package:todo_app/core/widgets/custom_button.dart';
 import 'package:todo_app/features/home/presentation/widgets/date_and_time_picker.dart';
@@ -14,6 +15,7 @@ class AddNewTaskPageBody extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categoryController = useValueNotifier<TodoCategory?>(null);
     final dateController = useTextEditingController();
     final timeController = useTextEditingController();
     final titleController = useTextEditingController();
@@ -49,7 +51,7 @@ class AddNewTaskPageBody extends HookWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const TaskCategory(),
+            TaskCategory(categoryController: categoryController),
             const SizedBox(height: 20),
             TimeAndDatePicker(
               dateController: dateController,
