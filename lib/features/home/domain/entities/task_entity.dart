@@ -5,20 +5,24 @@ import 'package:todo_app/features/home/data/models/task_model.dart';
 class TaskEntity {
   int id;
   String title;
-  TodoCategory category;
-  String date;
-  String time;
+  late TodoCategory category;
+  late String date;
+  late String time;
   String? notes;
   bool isCompleted;
   TaskEntity({
     required this.title,
-    this.id = 0,
-    this.category = TodoCategory.others,
-    this.date = "Later",
-    this.time = "Later",
+    required String date,
+    required String time,
+    this.id = 0, // Initialize id here
+    TodoCategory? category,
     this.notes,
     this.isCompleted = false,
-  });
+  }) {
+    this.category = category ?? TodoCategory.others;
+    this.date = date.isEmpty ? "Later" : date;
+    this.time = time.isEmpty ? "Later" : time;
+  }
   TaskModel toTaskModel() {
     return TaskModel(
       id: id,
