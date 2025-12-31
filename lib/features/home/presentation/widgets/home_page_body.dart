@@ -5,17 +5,13 @@ import 'package:todo_app/core/helper/constants.dart';
 import 'package:todo_app/core/utils/app_navigation.dart';
 import 'package:todo_app/core/widgets/custom_button.dart';
 import 'package:todo_app/features/home/presentation/pages/add_new_task_page.dart';
-import 'package:todo_app/features/home/presentation/widgets/task_Item.dart';
-import 'package:todo_app/features/home/presentation/widgets/task_container_list.dart';
+import 'package:todo_app/features/home/presentation/widgets/active_tasks_builder.dart';
+import 'package:todo_app/features/home/presentation/widgets/completed_tasks_builder.dart';
 import 'package:animations/animations.dart';
 
 class HomePageBody extends StatelessWidget {
   const HomePageBody({super.key});
-  final List<TaskItem> tasks = const [
-    TaskItem(),
-    TaskItem(isCompleted: true),
-    TaskItem(isLastTask: true),
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,29 +45,14 @@ class HomePageBody extends StatelessWidget {
               const SliverToBoxAdapter(child: SizedBox(height: 30)),
 
               const SliverToBoxAdapter(child: SizedBox(height: 20)),
-              SliverToBoxAdapter(
-                child: TaskContainerList(
-                  child: Column(
-                    children: List.generate(tasks.length, (index) {
-                      return tasks[index];
-                    }),
-                  ),
-                ),
-              ),
+              const SliverToBoxAdapter(child: ActiveTasksBuilder()),
               const SliverToBoxAdapter(child: SizedBox(height: 20)),
               SliverToBoxAdapter(
                 child: Text("Completed", style: AppTextStyles.medium20),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 20)),
-              SliverToBoxAdapter(
-                child: TaskContainerList(
-                  child: Column(
-                    children: List.generate(tasks.length, (index) {
-                      return tasks[index];
-                    }),
-                  ),
-                ),
-              ),
+              const SliverToBoxAdapter(child: CompletedTasksBuilder()),
+              SliverToBoxAdapter(child: SizedBox(height: 100.h)),
             ],
           ),
           Positioned(
