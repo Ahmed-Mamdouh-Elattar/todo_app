@@ -41,7 +41,7 @@ final class DatabaseOperationProvider
   }
 }
 
-String _$databaseOperationHash() => r'7e81eda8766062f159625dffe844072c435ccdfb';
+String _$databaseOperationHash() => r'9fd447d364806432598c8618f3a106466f4b388d';
 
 abstract class _$DatabaseOperation extends $Notifier<DatabaseOperationState> {
   DatabaseOperationState build();

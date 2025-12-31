@@ -13,8 +13,8 @@ class DatabaseOperation extends _$DatabaseOperation {
 
   void addTask(TaskEntity taskEntity) {
     try {
-      ref.watch(databaseRepoProvider).addTask(taskEntity);
-      state = const DatabaseOperationState.success();
+      ref.read(databaseRepoProvider).addTask(taskEntity);
+      state = DatabaseOperationState.success(task: taskEntity);
     } catch (e) {
       state = const DatabaseOperationState.failure("Failed to add task");
     }
@@ -22,8 +22,8 @@ class DatabaseOperation extends _$DatabaseOperation {
 
   void updateTask(TaskEntity taskEntity) {
     try {
-      ref.watch(databaseRepoProvider).updateTask(taskEntity);
-      state = const DatabaseOperationState.success();
+      ref.read(databaseRepoProvider).updateTask(taskEntity);
+      state = DatabaseOperationState.success(task: taskEntity);
     } catch (e) {
       state = const DatabaseOperationState.failure("Failed to update task");
     }
@@ -31,7 +31,7 @@ class DatabaseOperation extends _$DatabaseOperation {
 
   void deleteTask(int taskId) {
     try {
-      ref.watch(databaseRepoProvider).deleteTask(taskId);
+      ref.read(databaseRepoProvider).deleteTask(taskId);
       state = const DatabaseOperationState.success();
     } catch (e) {
       state = const DatabaseOperationState.failure("Failed to delete task");

@@ -122,11 +122,11 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  success,TResult Function( String errorMessage)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( TaskEntity? task)?  success,TResult Function( String errorMessage)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case DatabaseOperationInitial() when initial != null:
 return initial();case DatabaseOperationSuccess() when success != null:
-return success();case DatabaseOperationFailure() when failure != null:
+return success(_that.task);case DatabaseOperationFailure() when failure != null:
 return failure(_that.errorMessage);case _:
   return orElse();
 
@@ -145,11 +145,11 @@ return failure(_that.errorMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  success,required TResult Function( String errorMessage)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( TaskEntity? task)  success,required TResult Function( String errorMessage)  failure,}) {final _that = this;
 switch (_that) {
 case DatabaseOperationInitial():
 return initial();case DatabaseOperationSuccess():
-return success();case DatabaseOperationFailure():
+return success(_that.task);case DatabaseOperationFailure():
 return failure(_that.errorMessage);}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -164,11 +164,11 @@ return failure(_that.errorMessage);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  success,TResult? Function( String errorMessage)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( TaskEntity? task)?  success,TResult? Function( String errorMessage)?  failure,}) {final _that = this;
 switch (_that) {
 case DatabaseOperationInitial() when initial != null:
 return initial();case DatabaseOperationSuccess() when success != null:
-return success();case DatabaseOperationFailure() when failure != null:
+return success(_that.task);case DatabaseOperationFailure() when failure != null:
 return failure(_that.errorMessage);case _:
   return null;
 
@@ -213,33 +213,67 @@ String toString() {
 
 
 class DatabaseOperationSuccess implements DatabaseOperationState {
-  const DatabaseOperationSuccess();
+  const DatabaseOperationSuccess({this.task});
   
 
+ final  TaskEntity? task;
 
-
+/// Create a copy of DatabaseOperationState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DatabaseOperationSuccessCopyWith<DatabaseOperationSuccess> get copyWith => _$DatabaseOperationSuccessCopyWithImpl<DatabaseOperationSuccess>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DatabaseOperationSuccess);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DatabaseOperationSuccess&&(identical(other.task, task) || other.task == task));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,task);
 
 @override
 String toString() {
-  return 'DatabaseOperationState.success()';
+  return 'DatabaseOperationState.success(task: $task)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $DatabaseOperationSuccessCopyWith<$Res> implements $DatabaseOperationStateCopyWith<$Res> {
+  factory $DatabaseOperationSuccessCopyWith(DatabaseOperationSuccess value, $Res Function(DatabaseOperationSuccess) _then) = _$DatabaseOperationSuccessCopyWithImpl;
+@useResult
+$Res call({
+ TaskEntity? task
+});
 
 
+
+
+}
+/// @nodoc
+class _$DatabaseOperationSuccessCopyWithImpl<$Res>
+    implements $DatabaseOperationSuccessCopyWith<$Res> {
+  _$DatabaseOperationSuccessCopyWithImpl(this._self, this._then);
+
+  final DatabaseOperationSuccess _self;
+  final $Res Function(DatabaseOperationSuccess) _then;
+
+/// Create a copy of DatabaseOperationState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? task = freezed,}) {
+  return _then(DatabaseOperationSuccess(
+task: freezed == task ? _self.task : task // ignore: cast_nullable_to_non_nullable
+as TaskEntity?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
