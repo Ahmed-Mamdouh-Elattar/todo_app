@@ -169,6 +169,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final titleParam = const fb.StringReader(
           asciiOptimization: true,
         ).vTableGet(buffer, rootOffset, 6, '');
+        final idParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
         final categoryParam = const fb.StringReader(
           asciiOptimization: true,
         ).vTableGetNullable(buffer, rootOffset, 8);
@@ -188,12 +194,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
         );
         final object = TaskModel(
           title: titleParam,
+          id: idParam,
           category: categoryParam,
           date: dateParam,
           time: timeParam,
           notes: notesParam,
           isCompleted: isCompletedParam,
-        )..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+        );
 
         return object;
       },

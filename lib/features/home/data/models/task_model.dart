@@ -1,11 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:objectbox/objectbox.dart';
+import 'package:todo_app/core/enums/task_category.dart';
+import 'package:todo_app/features/home/domain/entities/task_entity.dart';
 
 @Entity()
 class TaskModel {
   @Id()
-  int id = 0;
+  int id;
   String title;
   String? category;
   String? date;
@@ -14,6 +16,7 @@ class TaskModel {
   bool? isCompleted;
   TaskModel({
     required this.title,
+    this.id = 0,
     this.category,
     this.date,
     this.time,
@@ -45,5 +48,17 @@ class TaskModel {
         time.hashCode ^
         notes.hashCode ^
         isCompleted.hashCode;
+  }
+
+  TaskEntity toEntity() {
+    return TaskEntity(
+      id: id,
+      title: title,
+      category: category != null ? TaskCategory.values.byName(category!) : null,
+      date: date,
+      time: time,
+      notes: notes,
+      isCompleted: isCompleted,
+    );
   }
 }
