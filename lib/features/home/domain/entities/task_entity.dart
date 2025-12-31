@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:todo_app/core/enums/task_category.dart' show TaskCategory;
+import 'package:todo_app/core/enums/todo_category.dart' show TodoCategory;
 import 'package:todo_app/features/home/data/models/task_model.dart';
 
 class TaskEntity {
   int id;
   String title;
-  TaskCategory? category;
+  TodoCategory? category;
   String? date;
   String? time;
   String? notes;

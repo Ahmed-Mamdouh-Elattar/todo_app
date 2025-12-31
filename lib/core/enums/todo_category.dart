@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum TaskCategory {
+enum TodoCategory {
   work(color: Colors.blue, icon: Icons.work),
   personal(color: Colors.green, icon: Icons.person),
   home(color: Colors.orange, icon: Icons.home),
@@ -14,5 +14,5 @@ enum TaskCategory {
 
   final Color color;
   final IconData icon;
-  const TaskCategory({required this.color, required this.icon});
+  const TodoCategory({required this.color, required this.icon});
 }
