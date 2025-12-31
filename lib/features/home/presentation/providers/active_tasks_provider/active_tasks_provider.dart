@@ -4,7 +4,9 @@ import 'package:todo_app/features/home/domain/entities/task_entity.dart';
 part 'active_tasks_provider.g.dart';
 
 @riverpod
-Stream<List<TaskEntity>> activeTasks(Ref ref) {
+Stream<List<TaskEntity>> activeTasks(Ref ref) async* {
   final databaseRepo = ref.watch(databaseRepoProvider);
-  return databaseRepo.getActiveTasks();
+  await for (final tasks in databaseRepo.getActiveTasks()) {
+    yield tasks;
+  }
 }

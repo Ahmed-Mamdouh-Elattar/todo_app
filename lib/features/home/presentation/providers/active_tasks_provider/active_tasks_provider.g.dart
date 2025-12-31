@@ -46,4 +46,4 @@ final class ActiveTasksProvider
   }
 }
 
-String _$activeTasksHash() => r'0334db4c43108b4a8bc42aece7797d2aa0c823d9';
+String _$activeTasksHash() => r'3dfa35acb47a2d3249346539fa4e7c5871c8ebde';

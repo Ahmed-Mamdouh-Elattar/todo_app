@@ -46,4 +46,4 @@ final class CompletedTasksProvider
   }
 }
 
-String _$completedTasksHash() => r'a3ea198c0feef0063376bc77e8dd6083454cc7d0';
+String _$completedTasksHash() => r'51b9fa7ea07ef89567c751a5ac74df9dadf93874';
