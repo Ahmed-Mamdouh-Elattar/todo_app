@@ -23,6 +23,27 @@ class TaskEntity {
     this.date = date.isEmpty ? "Later" : date;
     this.time = time.isEmpty ? "Later" : time;
   }
+
+  TaskEntity copyWith({
+    int? id,
+    String? title,
+    TodoCategory? category,
+    String? date,
+    String? time,
+    String? notes,
+    bool? isCompleted,
+  }) {
+    return TaskEntity(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      category: category ?? this.category,
+      date: date ?? this.date,
+      time: time ?? this.time,
+      notes: notes ?? this.notes,
+      isCompleted: isCompleted ?? this.isCompleted,
+    );
+  }
+
   TaskModel toTaskModel() {
     return TaskModel(
       id: id,
