@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/config/app_text_styles.dart';
@@ -31,16 +32,25 @@ class CompletedTasksBuilder extends StatelessWidget {
                     ),
                   ),
                 ),
-              );
+              ).animate().fade();
             } else {
               return TaskContainerList(
                 child: Column(
-                  children: List.generate(data.length, (index) {
-                    if (index == data.length - 1) {
-                      return TaskItem(task: data[index], isLastTask: true);
-                    }
-                    return TaskItem(task: data[index]);
-                  }),
+                  children: [
+                    ...List.generate(data.length, (index) {
+                      if (index == data.length - 1) {
+                        return TaskItem(
+                          task: data[index],
+                          isLastTask: true,
+                          key: ValueKey(data[index].id),
+                        );
+                      }
+                      return TaskItem(
+                        task: data[index],
+                        key: ValueKey(data[index].id),
+                      );
+                    }),
+                  ],
                 ),
               );
             }

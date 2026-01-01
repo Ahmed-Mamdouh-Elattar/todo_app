@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/config/app_text_styles.dart';
@@ -33,24 +34,28 @@ class ActiveTasksBuilder extends StatelessWidget {
                     ),
                   ),
                 ),
-              );
+              ).animate().fade();
             } else {
               return TaskContainerList(
                 child: Column(
-                  children: List.generate(data.length, (index) {
-                    final task = data[index];
-                    if (index == data.length - 1) {
+                  children: [
+                    ...List.generate(data.length, (index) {
+                      final task = data[index];
+                      if (index == data.length - 1) {
+                        return TaskItem(
+                          key: ValueKey(task.id),
+                          task: task,
+                          isLastTask: true,
+                          onDismissed: (direction) => deleteTask(ref, task),
+                        );
+                      }
                       return TaskItem(
-                        task: task,
-                        isLastTask: true,
+                        key: ValueKey(task.id),
+                        task: data[index],
                         onDismissed: (direction) => deleteTask(ref, task),
                       );
-                    }
-                    return TaskItem(
-                      task: data[index],
-                      onDismissed: (direction) => deleteTask(ref, task),
-                    );
-                  }),
+                    }),
+                  ],
                 ),
               );
             }

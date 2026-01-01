@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/core/config/app_color.dart';
 import 'package:todo_app/core/config/app_text_styles.dart';
@@ -99,6 +100,6 @@ class TaskItem extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ).animate().fadeIn(duration: 500.ms);
   }
 }
