@@ -7,6 +7,7 @@ import 'package:todo_app/core/config/app_text_styles.dart';
 import 'package:todo_app/core/utils/app_navigation.dart';
 import 'package:todo_app/features/home/domain/entities/task_entity.dart';
 import 'package:todo_app/features/home/presentation/pages/add_or_edit_task_page.dart';
+import 'package:todo_app/features/home/presentation/providers/database_operation_provider/database_operation_provider.dart';
 import 'package:todo_app/features/home/presentation/providers/task_entity_provider/task_entity_provider.dart';
 import 'package:todo_app/features/home/presentation/widgets/category_icon.dart';
 
@@ -77,10 +78,20 @@ class TaskItem extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                Checkbox(
-                  activeColor: AppColor.primary,
-                  value: task.isCompleted ? true : false,
-                  onChanged: (value) {},
+                Consumer(
+                  builder: (context, ref, child) {
+                    return Checkbox(
+                      activeColor: AppColor.primary,
+                      value: task.isCompleted,
+                      onChanged: (value) {
+                        if (value != null) {
+                          ref
+                              .read(databaseOperationProvider.notifier)
+                              .updateTask(task.copyWith(isCompleted: value));
+                        }
+                      },
+                    );
+                  },
                 ),
               ],
             ),
