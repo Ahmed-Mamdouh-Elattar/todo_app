@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/core/config/app_color.dart';
 import 'package:todo_app/core/utils/app_navigation.dart';
 import 'package:todo_app/features/home/presentation/providers/task_entity_provider/task_entity_provider.dart';
-import 'package:todo_app/features/home/presentation/widgets/add_or_Edit_task_page_body.dart';
+import 'package:todo_app/features/home/presentation/widgets/add_or_edit_task_page_body.dart';
 
 class AddOrEditTaskPage extends ConsumerWidget {
   const AddOrEditTaskPage({super.key});
