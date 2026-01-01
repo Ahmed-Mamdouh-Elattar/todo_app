@@ -4,7 +4,7 @@ import 'package:todo_app/core/config/app_text_styles.dart';
 import 'package:todo_app/core/helper/constants.dart';
 import 'package:todo_app/core/utils/app_navigation.dart';
 import 'package:todo_app/core/widgets/custom_button.dart';
-import 'package:todo_app/features/home/presentation/pages/add_new_task_page.dart';
+import 'package:todo_app/features/home/presentation/pages/add_or_edit_task_page.dart';
 import 'package:todo_app/features/home/presentation/widgets/active_tasks_builder.dart';
 import 'package:todo_app/features/home/presentation/widgets/completed_tasks_builder.dart';
 import 'package:animations/animations.dart';
@@ -64,7 +64,7 @@ class HomePageBody extends StatelessWidget {
               onPressed: () {
                 AppNavigation.pushSharedAxis(
                   context,
-                  const AddNewTaskPage(),
+                  const AddOrEditTaskPage(),
                   type: SharedAxisTransitionType.vertical,
                 );
               },

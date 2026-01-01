@@ -10,7 +10,7 @@ class TaskCategory extends HookWidget {
   final ValueNotifier<TodoCategory?> categoryController;
   @override
   Widget build(BuildContext context) {
-    final selectedCategory = useState<TodoCategory?>(null);
+    final selectedCategory = useState<TodoCategory?>(categoryController.value);
     return SizedBox(
       height: 50.h,
       child: Row(
