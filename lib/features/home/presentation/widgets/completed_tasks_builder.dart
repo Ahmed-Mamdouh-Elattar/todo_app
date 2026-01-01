@@ -3,7 +3,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/config/app_text_styles.dart';
+import 'package:todo_app/features/home/domain/entities/task_entity.dart';
 import 'package:todo_app/features/home/presentation/providers/completed_tasks_provider/completed_tasks_provider.dart';
+import 'package:todo_app/features/home/presentation/providers/database_operation_provider/database_operation_provider.dart';
 import 'package:todo_app/features/home/presentation/widgets/task_Item.dart';
 import 'package:todo_app/features/home/presentation/widgets/task_container_list.dart';
 
@@ -36,21 +38,22 @@ class CompletedTasksBuilder extends StatelessWidget {
             } else {
               return TaskContainerList(
                 child: Column(
-                  children: [
-                    ...List.generate(data.length, (index) {
-                      if (index == data.length - 1) {
-                        return TaskItem(
-                          task: data[index],
-                          isLastTask: true,
-                          key: ValueKey(data[index].id),
-                        );
-                      }
+                  children: List.generate(data.length, (index) {
+                    if (index == data.length - 1) {
                       return TaskItem(
+                        onDismissed: (direction) =>
+                            deleteTask(ref, data[index]),
                         task: data[index],
+                        isLastTask: true,
                         key: ValueKey(data[index].id),
                       );
-                    }),
-                  ],
+                    }
+                    return TaskItem(
+                      onDismissed: (direction) => deleteTask(ref, data[index]),
+                      task: data[index],
+                      key: ValueKey(data[index].id),
+                    );
+                  }),
                 ),
               );
             }
@@ -64,5 +67,9 @@ class CompletedTasksBuilder extends StatelessWidget {
         );
       },
     );
+  }
+
+  void deleteTask(WidgetRef ref, TaskEntity task) {
+    ref.read(databaseOperationProvider.notifier).deleteTask(task.id);
   }
 }

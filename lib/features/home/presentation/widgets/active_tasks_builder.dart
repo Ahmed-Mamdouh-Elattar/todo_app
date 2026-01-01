@@ -38,24 +38,22 @@ class ActiveTasksBuilder extends StatelessWidget {
             } else {
               return TaskContainerList(
                 child: Column(
-                  children: [
-                    ...List.generate(data.length, (index) {
-                      final task = data[index];
-                      if (index == data.length - 1) {
-                        return TaskItem(
-                          key: ValueKey(task.id),
-                          task: task,
-                          isLastTask: true,
-                          onDismissed: (direction) => deleteTask(ref, task),
-                        );
-                      }
+                  children: List.generate(data.length, (index) {
+                    final task = data[index];
+                    if (index == data.length - 1) {
                       return TaskItem(
                         key: ValueKey(task.id),
-                        task: data[index],
+                        task: task,
+                        isLastTask: true,
                         onDismissed: (direction) => deleteTask(ref, task),
                       );
-                    }),
-                  ],
+                    }
+                    return TaskItem(
+                      key: ValueKey(task.id),
+                      task: data[index],
+                      onDismissed: (direction) => deleteTask(ref, task),
+                    );
+                  }),
                 ),
               );
             }
